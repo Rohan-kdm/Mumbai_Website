@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mumbai Silicon — Next-Gen RISC-V Hardware & Custom PCB Engineering</title>
+  <meta name="description" content="Pioneering open-standard RISC-V hardware development boards, high-speed PCB engineering, and custom electronics manufacturing from Mumbai, India. Deployable on Cloudflare.">
+
+  <!-- CSS Design System & Components -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+  <!-- Ambient Particle Canvas Background -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Futuristic Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo">
+        <div class="logo-icon">MS</div>
+        <div class="brand-name">MUMBAI <span>SILICON</span></div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#hardware" class="nav-link">MS-RV1 SoC</a></li>
+        <li><a href="#kicad-lab" class="nav-link">KiCad Lab</a></li>
+        <li><a href="#strategy" class="nav-link">Open Hardware</a></li>
+        <li><a href="#configurator" class="nav-link">PCB Configurator</a></li>
+        <li><a href="#terminal" class="nav-link">RISC-V Terminal</a></li>
+        <li><a href="#contact-hub" class="nav-link">Contact & Careers</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Haptic Sound FX">🔊</button>
+        <a href="#configurator" class="btn btn-primary" style="padding:0.6rem 1.2rem;font-size:0.875rem">Order Sample</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="badge-tag">
+          <span class="badge-pulse"></span> Flagship RISC-V Architecture v2.4
+        </div>
+        <h1>Pioneering Next-Gen <span class="text-gradient-cyan">RISC-V Silicon</span> & Custom PCB Hardware</h1>
+        <p class="hero-subtitle">
+          Engineering custom multi-peripheral compute boards from Mumbai. Powered by open-standard RISC-V processors, 1GbE Ethernet, 4K HDMI, USB-C PD, Micro-USB UART, and live OLED telemetry.
+        </p>
+
+        <div style="display:flex;gap:1rem;flex-wrap:wrap">
+          <a href="#configurator" class="btn btn-primary">Configure Custom PCB</a>
+          <a href="#hardware" class="btn btn-secondary">Inspect MS-RV1 Specs</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <h3>4-Core</h3>
+            <p>RISC-V 1.8GHz</p>
+          </div>
+          <div class="stat-item">
+            <h3>&lt; 4 Wks</h3>
+            <p>Custom PCB Lead Time</p>
+          </div>
+          <div class="stat-item">
+            <h3>100%</h3>
+            <p>Open Schematic Standard</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3D Hardware Inspector Canvas -->
+      <div class="pcb-3d-wrapper">
+        <canvas id="pcb-3d-canvas"></canvas>
+
+        <div id="pcb-tooltip" class="component-tooltip"></div>
+
+        <div class="canvas-overlay-controls">
+          <div class="control-pill-group">
+            <button class="control-pill-btn" onclick="window.pcbViewer && window.pcbViewer.resetView()">Reset View</button>
+            <button class="control-pill-btn active">3D Rotate (Drag)</button>
+          </div>
+          <div class="telemetry-live-badge">
+            <span class="badge-pulse" style="background:#00ff88;box-shadow:0 0 8px #00ff88"></span>
+            OLED TELEMETRY ONLINE
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HARDWARE SPECIFICATIONS SECTION -->
+  <section id="hardware" class="section-padding">
+    <div class="container">
+      <div class="section-title">
+        <div class="badge-tag">Flagship Development Board</div>
+        <h2>Mumbai Silicon <span class="text-gradient-gold">MS-RV1 Specifications</span></h2>
+        <p>Built for industrial IoT, embedded AI acceleration, and edge Linux computing.</p>
+      </div>
+
+      <div class="spec-grid">
+        <div class="glass-card spec-card">
+          <div class="spec-icon">🧠</div>
+          <h3>RISC-V Quad-Core Brain</h3>
+          <p style="color:var(--text-muted)">64-Bit RV64GC Microprocessor @ 1.8GHz with integrated Vector extension for AI edge inference and low latency.</p>
+        </div>
+
+        <div class="glass-card spec-card">
+          <div class="spec-icon">⚡</div>
+          <h3>Multi-Peripheral IO</h3>
+          <p style="color:var(--text-muted)">1GbE RJ45 Ethernet, HDMI 2.0 (4K 60Hz), USB 3.0 Type-A, USB-C PD (20V/3A), and Micro-USB UART debug console.</p>
+        </div>
+
+        <div class="glass-card spec-card">
+          <div class="spec-icon">📺</div>
+          <h3>0.96" OLED Telemetry Screen</h3>
+          <p style="color:var(--text-muted)">On-board monochrome OLED display showing real-time CPU thermal stats, IP address, and system health status.</p>
+        </div>
+
+        <div class="glass-card spec-card">
+          <div class="spec-icon">💾</div>
+          <h3>Storage & 40-Pin Header</h3>
+          <p style="color:var(--text-muted)">Bootable MicroSD UHS-I slot alongside a 40-pin GPIO expansion header supporting SPI, I2C, UART, CAN Bus, and PWM.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KICAD GERBER LAB EXPLORER -->
+  <section id="kicad-lab" class="section-padding" style="background:var(--bg-secondary)">
+    <div class="container">
+      <div class="section-title">
+        <div class="badge-tag">Interactive CAD Explorer</div>
+        <h2>KiCad Open-Source <span class="text-gradient-cyan">PCB Layer Explorer</span></h2>
+        <p>Toggle high-speed signal layers, differential pair traces, and BGA pad fanouts in real time.</p>
+      </div>
+
+      <div class="kicad-lab-container">
+        <div class="layer-panel">
+          <h4 style="margin-bottom:0.75rem">Board Layers</h4>
+
+          <label class="layer-toggle-item">
+            <span style="display:flex;align-items:center;gap:0.5rem">
+              <span class="layer-indicator" style="background:#e5b842"></span> Top Copper (F.Cu)
+            </span>
+            <input type="checkbox" class="kicad-layer-checkbox" data-layer="topCopper" checked>
+          </label>
+
+          <label class="layer-toggle-item">
+            <span style="display:flex;align-items:center;gap:0.5rem">
+              <span class="layer-indicator" style="background:#00f0ff"></span> Bottom Copper (B.Cu)
+            </span>
+            <input type="checkbox" class="kicad-layer-checkbox" data-layer="bottomCopper">
+          </label>
+
+          <label class="layer-toggle-item">
+            <span style="display:flex;align-items:center;gap:0.5rem">
+              <span class="layer-indicator" style="background:#ffffff"></span> Silkscreen (F.Silk)
+            </span>
+            <input type="checkbox" class="kicad-layer-checkbox" data-layer="silkscreen" checked>
+          </label>
+
+          <label class="layer-toggle-item">
+            <span style="display:flex;align-items:center;gap:0.5rem">
+              <span class="layer-indicator" style="background:#00f0ff"></span> Drills & Vias
+            </span>
+            <input type="checkbox" class="kicad-layer-checkbox" data-layer="drills" checked>
+          </label>
+
+          <label class="layer-toggle-item">
+            <span style="display:flex;align-items:center;gap:0.5rem">
+              <span class="layer-indicator" style="background:#0a3a2a"></span> Solder Mask
+            </span>
+            <input type="checkbox" class="kicad-layer-checkbox" data-layer="soldermask">
+          </label>
+
+          <a href="#configurator" class="btn btn-secondary" style="margin-top:1rem;width:100%;font-size:0.85rem">
+            Request Tweak to this Gerber
+          </a>
+        </div>
+
+        <div class="kicad-canvas-viewport">
+          <canvas id="kicad-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPEN HARDWARE BUSINESS STRATEGY SECTION -->
+  <section id="strategy" class="section-padding">
+    <div class="container">
+      <div class="section-title">
+        <div class="badge-tag">Business Architecture & Strategy</div>
+        <h2>How Mumbai Silicon <span class="text-gradient-emerald">Leverages Open PCB Designs</span></h2>
+        <p>Combining industrial open-hardware reference schematics with proprietary peripheral optimization for enterprise clients.</p>
+      </div>
+
+      <div class="spec-grid">
+        <div class="glass-card">
+          <h3 style="color:var(--accent-cyan);margin-bottom:0.75rem">1. Sub-Nanosecond Clocking</h3>
+          <p style="color:var(--text-muted)">We adapt high-reliability timing schematics for sub-nanosecond clock synchronization across high-speed expansion modules.</p>
+        </div>
+
+        <div class="glass-card">
+          <h3 style="color:var(--accent-emerald);margin-bottom:0.75rem">2. Multi-Layer Power Delivery</h3>
+          <p style="color:var(--text-muted)">Utilizing 4-layer and 6-layer power rail decoupling stackups to guarantee zero voltage drop under heavy RISC-V workloads.</p>
+        </div>
+
+        <div class="glass-card">
+          <h3 style="color:var(--accent-gold);margin-bottom:0.75rem">3. 90Ω / 100Ω Differential Traces</h3>
+          <p style="color:var(--text-muted)">Re-using impedance-calibrated microstrip tracks to deliver crystal-clear 4K HDMI 2.0 video output and Gigabit Ethernet.</p>
+        </div>
+
+        <div class="glass-card">
+          <h3 style="color:var(--accent-purple);margin-bottom:0.75rem">4. Rapid Turnaround R&D</h3>
+          <p style="color:var(--text-muted)">By starting with pre-validated reference blocks, we reduce custom board prototyping cycles from 12 months down to 4 weeks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PCB CONFIGURATOR & INSTANT QUOTE ESTIMATOR -->
+  <section id="configurator" class="section-padding" style="background:var(--bg-secondary)">
+    <div class="container">
+      <div class="section-title">
+        <div class="badge-tag">Real-Time Pricing Engine</div>
+        <h2>Custom PCB <span class="text-gradient-cyan">Configurator & RFQ</span></h2>
+        <p>Tailor your custom board specifications and receive an instant manufacturing estimate.</p>
+      </div>
+
+      <div class="configurator-wrapper">
+        <div>
+          <!-- Layer Count -->
+          <div class="option-group">
+            <label>PCB Layer Count</label>
+            <div class="option-grid">
+              <div class="radio-card" data-config-type="layer" data-config-val="2">2 Layers</div>
+              <div class="radio-card selected" data-config-type="layer" data-config-val="4">4 Layers</div>
+              <div class="radio-card" data-config-type="layer" data-config-val="6">6 Layers</div>
+              <div class="radio-card" data-config-type="layer" data-config-val="8">8 Layers</div>
+            </div>
+          </div>
+
+          <!-- Surface Finish -->
+          <div class="option-group">
+            <label>Surface Finish</label>
+            <div class="option-grid">
+              <div class="radio-card selected" data-config-type="finish" data-config-val="ENIG">ENIG Gold</div>
+              <div class="radio-card" data-config-type="finish" data-config-val="HASL">HASL Lead-Free</div>
+              <div class="radio-card" data-config-type="finish" data-config-val="ImmersionSilver">Immersion Silver</div>
+            </div>
+          </div>
+
+          <!-- RISC-V Processor Variant -->
+          <div class="option-group">
+            <label>RISC-V Brain Module</label>
+            <div class="option-grid">
+              <div class="radio-card selected" data-config-type="cpu" data-config-val="quad-1.8">Quad-Core 1.8GHz</div>
+              <div class="radio-card" data-config-type="cpu" data-config-val="dual-1.2">Dual-Core 1.2GHz</div>
+              <div class="radio-card" data-config-type="cpu" data-config-val="single-lp">Single-Core LP</div>
+            </div>
+          </div>
+
+          <!-- Peripheral Checkboxes -->
+          <div class="option-group">
+            <label>Peripherals & Interfaces</label>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.75rem">
+              <label class="layer-toggle-item">
+                <span>1GbE Ethernet</span>
+                <input type="checkbox" class="peri-checkbox" data-peri="ethernet" checked>
+              </label>
+              <label class="layer-toggle-item">
+                <span>HDMI 2.0 (4K)</span>
+                <input type="checkbox" class="peri-checkbox" data-peri="hdmi" checked>
+              </label>
+              <label class="layer-toggle-item">
+                <span>0.96" OLED Screen</span>
+                <input type="checkbox" class="peri-checkbox" data-peri="oled" checked>
+              </label>
+              <label class="layer-toggle-item">
+                <span>USB-C (Power+Data)</span>
+                <input type="checkbox" class="peri-checkbox" data-peri="usbc" checked>
+              </label>
+              <label class="layer-toggle-item">
+                <span>Wi-Fi 6 Module</span>
+                <input type="checkbox" class="peri-checkbox" data-peri="wifi6">
+              </label>
+            </div>
+          </div>
+
+          <!-- Quantity Input -->
+          <div class="form-group">
+            <label>Order Batch Quantity (Units)</label>
+            <input type="number" id="config-qty" class="form-control" value="10" min="1" max="10000">
+          </div>
+        </div>
+
+        <!-- Sticky Price Summary Card -->
+        <div class="summary-sticky-card">
+          <h4>Order Summary</h4>
+          <div>
+            <span style="color:var(--text-muted);font-size:0.85rem">Estimated Unit Price:</span>
+            <div id="unit-price-val" style="font-size:1.3rem;font-weight:700">₹6,474 ($78.00)</div>
+          </div>
+
+          <div>
+            <span style="color:var(--text-muted);font-size:0.85rem">Total Total RFQ Quote:</span>
+            <div id="total-price-val" class="price-display">₹64,740 ($780.00)</div>
+          </div>
+
+          <div id="config-summary-text" style="font-size:0.85rem;color:var(--text-muted);line-height:1.5">
+            Loading specifications...
+          </div>
+
+          <button id="btn-open-checkout" class="btn btn-emerald" style="width:100%">
+            🔒 Proceed to Checkout & Manufacturing
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RISC-V TERMINAL SIMULATOR -->
+  <section id="terminal" class="section-padding">
+    <div class="container">
+      <div class="section-title">
+        <div class="badge-tag">Live Server Simulation</div>
+        <h2>RISC-V Cloud Server & <span class="text-gradient-cyan">OS Boot Terminal</span></h2>
+        <p>Test simulated Linux boot commands and hardware diagnostics on the MS-RV1 board directly from your browser.</p>
+      </div>
+
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-muted)">root@mumbai-silicon:~# (UART / USB-C Debug Console)</div>
+          <div></div>
+        </div>
+
+        <div class="terminal-body" id="terminal-body-lines"></div>
+
+        <div style="padding:0.75rem 1.5rem;background:#09101d;border-top:1px solid var(--border-color)">
+          <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;flex-wrap:wrap">
+            <button class="control-pill-btn term-shortcut-btn" data-cmd="uname -a">uname -a</button>
+            <button class="control-pill-btn term-shortcut-btn" data-cmd="lscpu">lscpu</button>
+            <button class="control-pill-btn term-shortcut-btn" data-cmd="sensors">sensors</button>
+            <button class="control-pill-btn term-shortcut-btn" data-cmd="pinout">pinout</button>
+            <button class="control-pill-btn term-shortcut-btn" data-cmd="flash">flash firmware</button>
+          </div>
+
+          <div class="terminal-input-row">
+            <span class="terminal-prompt">root@mumbai-silicon:~#</span>
+            <input type="text" id="terminal-input" class="terminal-input" placeholder="Type a command (or click quick buttons above)..." autofocus>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT HUB: SALES, CAREERS, SUPPORT -->
+  <section id="contact-hub" class="section-padding" style="background:var(--bg-secondary)">
+    <div class="container">
+      <div class="section-title">
+        <div class="badge-tag">Get In Touch</div>
+        <h2>Mumbai Silicon <span class="text-gradient-gold">Contact Hub</span></h2>
+        <p>Connect with our Engineering Sales team, explore Career opportunities, or open a Support ticket.</p>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="contact-tabs">
+        <button class="tab-btn contact-tab-btn active" data-target-tab="sales">Sales & Custom RFQ</button>
+        <button class="tab-btn contact-tab-btn" data-target-tab="careers">Careers (We are Hiring)</button>
+        <button class="tab-btn contact-tab-btn" data-target-tab="support">Customer Support</button>
+      </div>
+
+      <!-- Sales Tab -->
+      <div id="tab-sales" class="contact-tab-content glass-card" style="max-width:700px;margin:0 auto">
+        <h3 style="margin-bottom:1.5rem">Contact Engineering Sales</h3>
+        <form class="mumbai-contact-form" data-form-type="sales">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" name="name" class="form-control" required placeholder="Rohan Sharma">
+            </div>
+            <div class="form-group">
+              <label>Work Email</label>
+              <input type="email" name="email" class="form-control" required placeholder="sales@company.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Project Scope / Custom Hardware Requirements</label>
+            <textarea name="message" class="form-control" rows="4" required placeholder="Describe your PCB design tweaks, peripheral requirements, or quantity timeline..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Submit Sales Request</button>
+        </form>
+      </div>
+
+      <!-- Careers Tab -->
+      <div id="tab-careers" class="contact-tab-content glass-card" style="max-width:850px;margin:0 auto;display:none">
+        <h3 style="margin-bottom:1.5rem">Join Mumbai Silicon Engineering Team</h3>
+        <div class="spec-grid" style="margin-bottom:2rem">
+          <div style="background:rgba(255,255,255,0.03);padding:1rem;border-radius:10px;border:1px solid var(--border-color)">
+            <h4 style="color:var(--accent-cyan)">Embedded Hardware Engineer</h4>
+            <p style="font-size:0.85rem;color:var(--text-muted)">High-speed PCB design, KiCad 8.0, Signal Integrity, Impedance matching. (Mumbai / Hybrid)</p>
+          </div>
+          <div style="background:rgba(255,255,255,0.03);padding:1rem;border-radius:10px;border:1px solid var(--border-color)">
+            <h4 style="color:var(--accent-emerald)">RISC-V Firmware Specialist</h4>
+            <p style="font-size:0.85rem;color:var(--text-muted)">C/C++, Bare-metal HAL, OpenSBI, Linux kernel driver development. (Remote / Mumbai)</p>
+          </div>
+        </div>
+
+        <form class="mumbai-contact-form" data-form-type="careers">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+            <div class="form-group">
+              <label>Applicant Name</label>
+              <input type="text" name="name" class="form-control" required placeholder="Full Name">
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" name="email" class="form-control" required placeholder="email@domain.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Portfolio / GitHub / Resume Link</label>
+            <input type="url" name="portfolio" class="form-control" required placeholder="https://github.com/your-username">
+          </div>
+          <button type="submit" class="btn btn-emerald" style="width:100%">Apply for Position</button>
+        </form>
+      </div>
+
+      <!-- Support Tab -->
+      <div id="tab-support" class="contact-tab-content glass-card" style="max-width:700px;margin:0 auto;display:none">
+        <h3 style="margin-bottom:1.5rem">Hardware Support & Documentation Hub</h3>
+        <p style="color:var(--text-muted);margin-bottom:1.5rem">Have a question about MS-RV1 firmware updates, pinouts, or board bootloader?</p>
+        <form class="mumbai-contact-form" data-form-type="support">
+          <div class="form-group">
+            <label>Board Serial Number / Order ID</label>
+            <input type="text" name="serial" class="form-control" placeholder="e.g. MS-948201">
+          </div>
+          <div class="form-group">
+            <label>Issue Description</label>
+            <textarea name="issue" class="form-control" rows="4" required placeholder="Describe your technical support query..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width:100%">Open Support Ticket</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="padding:4rem 0 2rem 0;background:#03060f;border-top:1px solid var(--border-color)">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2rem">
+      <div>
+        <div class="brand-logo" style="margin-bottom:0.5rem">
+          <div class="logo-icon">MS</div>
+          <div class="brand-name">MUMBAI <span>SILICON</span></div>
+        </div>
+        <p style="color:var(--text-dim);font-size:0.875rem">Designing & Manufacturing RISC-V Compute Boards from Mumbai, India.</p>
+      </div>
+
+      <div style="display:flex;gap:2rem;font-size:0.875rem;color:var(--text-muted)">
+        <a href="#hardware" style="color:inherit;text-decoration:none">Hardware</a>
+        <a href="#kicad-lab" style="color:inherit;text-decoration:none">KiCad Gerber Lab</a>
+        <a href="#configurator" style="color:inherit;text-decoration:none">PCB Configurator</a>
+        <a href="#contact-hub" style="color:inherit;text-decoration:none">Sales & Careers</a>
+      </div>
+    </div>
+    <div class="container" style="margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.05);text-align:center;font-size:0.8rem;color:var(--text-dim)">
+      © 2026 Mumbai Silicon Technologies Pvt. Ltd. Ready for Cloudflare Pages Deployment.
+    </div>
+  </footer>
+
+  <!-- CHECKOUT MODAL -->
+  <div id="checkout-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button id="modal-close-x" class="modal-close-btn">&times;</button>
+      <div id="checkout-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript Scripts -->
+  <script src="js/sound-effects.js"></script>
+  <script src="js/pcb-3d-viewer.js"></script>
+  <script src="js/kicad-viewer.js"></script>
+  <script src="js/configurator.js"></script>
+  <script src="js/terminal-simulator.js"></script>
+  <script src="js/payment-api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

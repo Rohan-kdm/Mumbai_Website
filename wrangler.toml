@@ -1,0 +1,11 @@
+name = "mumbai-silicon"
+pages_build_output_dir = "./"
+compatibility_date = "2026-08-01"
+
+[vars]
+ENVIRONMENT = "production"
+COMPANY_NAME = "Mumbai Silicon"
+REGION = "Mumbai, IN"
+
+[site]
+bucket = "./"

@@ -1,0 +1,19 @@
+{
+  "name": "mumbai-silicon",
+  "version": "1.0.0",
+  "description": "Mumbai Silicon - Next-Gen RISC-V Hardware & Custom PCB Engineering Web Application",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8080",
+    "deploy": "npx wrangler pages deploy . --project-name=mumbai-silicon"
+  },
+  "keywords": [
+    "pcb",
+    "risc-v",
+    "kicad",
+    "mumbai-silicon",
+    "cloudflare-pages"
+  ],
+  "author": "Mumbai Silicon Team",
+  "license": "MIT"
+}
