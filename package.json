@@ -5,6 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "python -m http.server 8080",
+    "build": "echo 'Static build ready'",
     "deploy": "npx wrangler pages deploy . --project-name=mumbai-silicon"
   },
   "keywords": [
